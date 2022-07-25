@@ -5,9 +5,10 @@ For running methods self.set_queue("command") must be called outside this module
 self.run() method was called as a thread
 eder.zermeno@acuitybrands.com
 """
-from makocolor import MakoColor
+#from makocolor import MakoColor
 from camera import Cameras
-from makomono import *
+from webcam import webCam
+#from makomono import *
 import configparser
 import optparse
 import sys
@@ -51,6 +52,7 @@ class runner_cam(tde_runner):
             self.inst = MakoMono(address=self.address)
         elif self.inst_type == "MakoColor":
             self.inst = MakoColor(address=self.address)
+        elif self.inst_type == ""
         else:
             self.inst = Cameras(address=self.address)
 
@@ -95,6 +97,15 @@ class runner_cam(tde_runner):
                     else:
                         self.set_response("CAMERA_OPEN")
                         lv_ipc.write_text(txt=f"Camera_open")
+
+                if arguments[0] == 'FRAME':
+                    # Open camera instance
+                    self.inst.example_frame(self.address)
+                    if __name__ == "__main__":
+                        print("CAMERA_EXAMPLE")
+                    else:
+                        self.set_response("CAMERA_EXAMPLE")
+                        lv_ipc.write_text(txt=f"Camera_example")
 
                 if arguments[0] == 'LED-ENGINES':
                     try:
@@ -216,7 +227,7 @@ class runner_cam(tde_runner):
                         self.set_response(f"CAMERA_CLOSE")
 
         self.inst.close()
-        sys.exit(1)
+        sys.exit(0)
 
 if __name__ == "__main__":
     obj = runner_cam()

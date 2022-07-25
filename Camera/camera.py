@@ -1,5 +1,4 @@
 """
-library for Mako Camera with Vimba
 * - Garza, Mauricio [mauricio.garza@acuitybrands.com]
 * - Sasso, David [david.sasso@task.com.mx]
 * - Zermeño, Eder [eder.zermeno@acuitybrands.com]
@@ -8,7 +7,6 @@ June,2022
 # Parent class
 import cv2 as cv
 import ipaddress
-from vimba import *
 from filters import run as runFilter
 from evaluations import objectCount
 import time
@@ -165,6 +163,11 @@ class Cameras:
         elif leds == self.led_number:
             print("Test Successful")
         return leds
+
+    def example_frame(self):
+        self.get_image()
+        self.show_image(self.frame,2,10)
+        return
 
     def get_data(self):
         leds, result = 0, False
@@ -379,14 +382,7 @@ class Cameras:
         self.recording = True
 
         def frame_handler(cam, frame):
-            self.cam.queue_frame(frame)
-            self.frame_queue.put(frame)
-
-        with self.vimba as vimba:
-            with self.cam as cam:
-                cam.start_streaming(frame_handler)
-                while self.recording:
-                    recording = cam.is_streaming()
+            return
 
     def start_async_stream(self):
         '''
