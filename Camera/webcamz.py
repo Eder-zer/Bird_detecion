@@ -69,8 +69,7 @@ class webCam(Cameras):
     # Override parent methods
     def open(self, address):
         self.set_cam(cv.VideoCapture(0))
-        self.cam.set(cv.CAP_PROP_EXPOSURE, 0.000005)
-        time.sleep(5)
+        self.cam.set(cv.CAP_PROP_EXPOSURE, 0.0000005)
         return
 
     def set_data(self, exposure, threshold, ROI, led_number, apply_ROI, fixture_size):
